@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Creation Page</title>
+    <th:block th:replace="~{fragment/css :: common-css}"></th:block>
+</head>
+<body>
+    <div id="toast"></div>
+    <div class="container">
+        <h1>Create New Project</h1>
+        <div>
+            <form th:action="@{/projects/create}" th:object="${newProject}" method="post">
+                <div class="mb-3">
+                    <label for="projectName" class="form-label">Project Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="projectName">
+                    <span th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
+                       th:errors="${newProject.name}"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="difficulty" class="form-label">Difficulty(E|M|K)</label>
+                    <input type="text" th:field="*{difficulty}" class="form-control" id="difficulty">
+                    <span th:if="${#fields.hasErrors('difficulty')}" th:errorclass="text-danger"
+                          th:errors="${newProject.difficulty}"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="dept" for="dept">Department</label>
+                    <select class="form-select" id="dept" th:field="*{dept}">
+                        <option value="">Open this select menu</option>
+                        <option th:each="item : ${depts}" th:value="${item.id}" th:text="${item.name}"></option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('dept')}" th:errorclass="text-danger"
+                          th:errors="${newProject.dept}"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="version" for="version">Version</label>
+                    <input type="text" class="form-control" th:field="*{version}" id="version">
+                    <span th:if="${#fields.hasErrors('version')}" th:errorclass="text-danger"
+                          th:errors="${newProject.version}"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <th:block th:replace="~{fragment/js :: common-js}"></th:block>
+    <script>
+        $(document).ready(function() {
+            let errorMessage = "[[${errorMessage}]]";
+	    	let status = Number([[${status}]]);
+
+	    	if (errorMessage) {
+	    	    toast({
+	    	        title: status === 200 ? "Thành công!" : "Lỗi!",
+	    	        message: errorMessage,
+	    	        type: status === 200 ? "success" : "error",
+	    	        duration: 3000
+	    	    });
+	    	}
+        });
+    </script>
+</body>
+</html>

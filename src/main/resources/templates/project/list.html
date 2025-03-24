@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Mangage</title>
+    <th:block th:replace="~{fragment/css :: common-css}"></th:block>
+</head>
+<body>
+<div id="toast"></div>
+<div class="container">
+    <h1>Manage Project List</h1>
+    <div class="mt-2">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="mt-5">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Project ID</th>
+                <th scope="col">Project Name</th>
+                <th scope="col">Difficulty</th>
+                <th scope="col">Version</th>
+                <th scope="col">Department</th>
+                <th scope="col">Insert Time</th>
+                <th scope="col">Update Time</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projects}">
+                <th scope="row">
+                    <a th:href="@{/projects/update/{id}(id=${project.id})}" th:text="${project.id}">1</a>
+                </th>
+                <td th:text="${project.name}">Project 1</td>
+                <td th:text="${project.difficulty}">D</td>
+                <td th:text="${project.version}">1</td>
+                <td th:text="${project.dept.name}">Deparment 1</td>
+                <td th:text="${project.insertTime}">12/03/2025</td>
+                <td th:text="${project.updateTime}">22/03/2025</td>
+                <td>
+                    <a th:href="@{/projects/delete/{id}(id=${project.id})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-end mt-2">
+        <a class="btn btn-success mx-3" th:href="@{/projects/create}">Register</a>
+        <form action="#" th:action="@{/logout}" method="post">
+            <button class="btn btn-danger">
+                Logout
+            </button>
+        </form>
+    </div>
+    <th:block th:replace="~{fragment/js :: common-js}"></th:block>
+    <script>
+        $(document).ready(function() {
+            let errorMessage = "[[${errorMessage}]]";
+	    	let status = Number([[${status}]]);
+
+	    	if (errorMessage) {
+	    	    toast({
+	    	        title: status === 200 ? "Thành công!" : "Lỗi!",
+	    	        message: errorMessage,
+	    	        type: status === 200 ? "success" : "error",
+	    	        duration: 3000
+	    	    });
+	    	}
+        });
+    </script>
+</div>
+</body>
+</html>
