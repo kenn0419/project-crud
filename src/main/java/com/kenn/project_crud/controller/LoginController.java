@@ -1,6 +1,6 @@
 package com.kenn.project_crud.controller;
 
-import com.kenn.project_crud.dto.LoginRequestDTO;
+import com.kenn.project_crud.dto.request.LoginRequestDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

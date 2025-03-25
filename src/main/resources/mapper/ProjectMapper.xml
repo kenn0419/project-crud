@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kenn.project_crud.mapper.ProjectMapper">
+
+    <resultMap id="ProjectResultMap" type="com.kenn.project_crud.model.Project">
+        <id property="id" column="project_id"/>
+        <result property="name" column="project_name"/>
+        <result property="difficulty" column="difficulty"/>
+        <result property="version" column="version"/>
+        <result property="insertTime" column="insert_time"/>
+        <result property="updateTime" column="update_time"/>
+        <association property="dept" javaType="com.kenn.project_crud.model.Dept">
+            <id property="id" column="dept_id"/>
+            <result property="name" column="dept_name"/>
+        </association>
+    </resultMap>
+
+</mapper>

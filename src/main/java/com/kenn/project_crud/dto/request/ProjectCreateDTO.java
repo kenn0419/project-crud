@@ -1,4 +1,4 @@
-package com.kenn.project_crud.dto;
+package com.kenn.project_crud.dto.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
