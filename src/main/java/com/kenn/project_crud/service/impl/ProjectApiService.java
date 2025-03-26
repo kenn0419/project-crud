@@ -2,6 +2,7 @@ package com.kenn.project_crud.service.impl;
 
 
 import com.kenn.project_crud.dto.response.PageResponse;
+import com.kenn.project_crud.dto.response.ProjectResponseDTO;
 import com.kenn.project_crud.mapper.ProjectMapper;
 import com.kenn.project_crud.model.Project;
 import lombok.RequiredArgsConstructor;
@@ -32,4 +33,19 @@ public class ProjectApiService {
         return pageResponse;
     }
 
+
+    public ProjectResponseDTO createProject(Project project) {
+        projectMapper.insert(project);
+
+        return this.convertToDTO(project);
+    }
+
+    private ProjectResponseDTO convertToDTO(Project project) {
+        ProjectResponseDTO responseDTO = new ProjectResponseDTO();
+        responseDTO.setId(project.getId());
+        responseDTO.setName(project.getName());
+        responseDTO.setDifficulty(String.valueOf(project.getDifficulty()));
+        responseDTO.setDept(project.getDepartment());
+        return responseDTO;
+    }
 }
