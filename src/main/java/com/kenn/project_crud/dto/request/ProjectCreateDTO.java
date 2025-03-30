@@ -13,8 +13,6 @@ public class ProjectCreateDTO {
 
     private Character difficulty;
 
-    private Long dept;
-
-    private Long version;
+    private String dept;
 
 }
